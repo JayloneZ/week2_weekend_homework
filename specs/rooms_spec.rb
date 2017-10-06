@@ -4,6 +4,7 @@ require_relative '../rooms.rb'
 require_relative '../guests.rb'
 require_relative '../karaoke_bar.rb'
 require_relative '../songs.rb'
+require_relative '../bar_tab.rb'
 
 class TestRooms < Minitest::Test
 
@@ -17,7 +18,8 @@ class TestRooms < Minitest::Test
     @room1 = Rooms.new("Latino Pop", 2)
     @room2 = Rooms.new("German Hits", 3)
     @room3 = Rooms.new("Swedish Pop", 3)
-    @karaoke_bar = KaraokeBar.new([@guest1, @guest2, @guest3], [@song1, @song2, @song3])
+    @bar_tab = BarTab.new()
+    @karaoke_bar = KaraokeBar.new([@guest1, @guest2, @guest3], [@song1, @song2, @song3], @bar_tab)
   end
 
 
@@ -66,6 +68,18 @@ class TestRooms < Minitest::Test
     @room1.add_song_by_title(@karaoke_bar, "Hips Don't Lie")
     result = @room1.add_guest_by_name(@karaoke_bar, "Yoni")
     assert_equal("This room has my favorite song!", result)
+  end
+
+  def test_guest_pays_to_enter_room()
+    @room1.add_guest_by_name(@karaoke_bar, "Yoni")
+    result = @guest1.money
+    assert_equal(45, result)
+  end
+
+  def test_guest_pays_to_enter_room__bar_earns_money
+    @room1.add_guest_by_name(@karaoke_bar, "Yoni")
+    result = @karaoke_bar.bar_tab
+    assert_equal(35, result)
   end
 
 end

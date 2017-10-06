@@ -10,12 +10,16 @@ class Rooms
   end
 
 
-  def add_guest_by_name(common_area, guest_name)
-    for guest in common_area.guests
+  def add_guest_by_name(karaoke_bar, guest_name)
+    for guest in karaoke_bar.guests
       if guest.name == guest_name
         if self.guests.length == capacity
           return "This room has reached capacity"
+        elsif guest.money < 5
+          return "Guest does not have enough money to enter this room"
         else
+          guest.money -= 5
+          karaoke_bar.bar_tab += 5
           self.guests.push(guest)
         end
       end
@@ -34,8 +38,8 @@ class Rooms
     return "This guest is not in this room"
   end
 
-  def add_song_by_title(common_area, song_title)
-    for song in common_area.songs
+  def add_song_by_title(karaoke_bar, song_title)
+    for song in karaoke_bar.songs
       if song.title == song_title
         self.songs.push(song)
       end
