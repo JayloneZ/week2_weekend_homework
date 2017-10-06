@@ -15,6 +15,8 @@ class Rooms
       if guest.name == guest_name
         if self.guests.length == capacity
           return "This room has reached capacity"
+        elsif self.guests.include?(guest)
+          return "Guest is already in the room"
         elsif guest.money < 5
           return "Guest is broke"
         else

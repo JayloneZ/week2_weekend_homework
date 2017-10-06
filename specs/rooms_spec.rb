@@ -87,4 +87,10 @@ class TestRooms < Minitest::Test
     assert_equal("Guest is broke", result)
   end
 
+  def test_guest_is_already_in_room()
+    @room1.add_guest_by_name(@karaoke_bar, "Yoni")
+    result = @room1.add_guest_by_name(@karaoke_bar, "Yoni")
+    assert_equal("Guest is already in the room", result)
+  end
+
 end
