@@ -16,7 +16,7 @@ class Rooms
         if self.guests.length == capacity
           return "This room has reached capacity"
         elsif guest.money < 5
-          return "Guest does not have enough money to enter this room"
+          return "Guest is broke"
         else
           guest.money -= 5
           karaoke_bar.bar_tab += 5

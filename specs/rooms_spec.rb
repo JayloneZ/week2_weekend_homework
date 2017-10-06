@@ -13,7 +13,7 @@ class TestRooms < Minitest::Test
     @song2 = Songs.new("99 Luftbalons", "Nena")
     @song3 = Songs.new("Dancing Queen", "ABBA")
     @guest1 = Guests.new("Yoni", 50, @song1)
-    @guest2 = Guests.new("Huascar", 30, @song2)
+    @guest2 = Guests.new("Huascar", 3, @song2)
     @guest3 = Guests.new("Miguel", 25, @song3)
     @room1 = Rooms.new("Latino Pop", 2)
     @room2 = Rooms.new("German Hits", 3)
@@ -76,10 +76,15 @@ class TestRooms < Minitest::Test
     assert_equal(45, result)
   end
 
-  def test_guest_pays_to_enter_room__bar_earns_money
+  def test_guest_pays_to_enter_room__bar_earns_money()
     @room1.add_guest_by_name(@karaoke_bar, "Yoni")
     result = @karaoke_bar.bar_tab
     assert_equal(35, result)
+  end
+
+  def test_guest_is_broke()
+    result = @room1.add_guest_by_name(@karaoke_bar, "Huascar")
+    assert_equal("Guest is broke", result)
   end
 
 end
