@@ -19,11 +19,20 @@ def add_guest_by_name(common_area, guest_name)
 end
 
 def remove_guest_by_name(guest_name)
-  self.guests.each {|guest|
+  for guest in guests.each
     if guest.name == guest_name
       self.guests.delete(guest)
     end
-  }
+  end
+  return "This guest is not in this room"
+end
+
+def add_song_by_title(common_area, song_title)
+  for song in common_area.songs
+    if song.title == song_title
+      self.songs.push(song)
+    end
+  end
 end
 
 end
