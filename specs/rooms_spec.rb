@@ -14,8 +14,8 @@ class TestRooms < Minitest::Test
     @song1 = Songs.new("Hips Don't Lie", "Shakira")
     @song2 = Songs.new("99 Luftbalons", "Nena")
     @song3 = Songs.new("Dancing Queen", "ABBA")
-    @room1 = Rooms.new("Latino Pop", 10)
-    @room2 = Rooms.new("German Hits", 15)
+    @room1 = Rooms.new("Latino Pop", 2)
+    @room2 = Rooms.new("German Hits", 3)
     @room3 = Rooms.new("Swedish Pop", 3)
     @common_area = CommonArea.new([@guest1, @guest2, @guest3], [@song1, @song2, @song3])
   end
@@ -53,6 +53,13 @@ class TestRooms < Minitest::Test
     @room1.add_song_by_title(@common_area, "Hips Don't Lie")
     songs = @room1.songs
     assert_equal([@song1], songs)
+  end
+
+  def test_room_capacity()
+    @room1.add_guest_by_name(@common_area, "Yoni")
+    @room1.add_guest_by_name(@common_area, "Miguel")
+    result = @room1.add_guest_by_name(@common_area, "Huascar")
+    assert_equal("This room has reached capacity", result)
   end
 
 end
