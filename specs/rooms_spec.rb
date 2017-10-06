@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/rg'
 require_relative '../rooms.rb'
 require_relative '../guests.rb'
+require_relative '../common_area.rb'
 
 class TestRooms < Minitest::Test
 
@@ -12,6 +13,7 @@ class TestRooms < Minitest::Test
     @room1 = Rooms.new("Latino Pop", 10)
     @room2 = Rooms.new("German Hits", 15)
     @room3 = Rooms.new("Swedish Pop", 3)
+    @common_area = CommonArea.new([@guest1, @guest2, @guest3])
   end
 
 
@@ -25,10 +27,17 @@ class TestRooms < Minitest::Test
     assert_equal(10, capacity)
   end
 
-  def test_add_guests()
-    @room1.add_guests(@guest1)
+  def test_add_guest_by_name()
+    @room1.add_guest_by_name(@common_area, "Yoni")
     guests = @room1.guests
     assert_equal([@guest1], guests)
+  end
+
+  def test_remove_guest_by_name()
+    @room1.add_guest_by_name(@common_area, "Yoni")
+    @room1.remove_guest_by_name("Yoni")
+    guests = @room1.guests
+    assert_equal([], guests)
   end
 
 end
