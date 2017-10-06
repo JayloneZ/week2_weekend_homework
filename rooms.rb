@@ -19,6 +19,9 @@ class Rooms
           self.guests.push(guest)
         end
       end
+      if self.songs.include?(guest.favorite_song)
+        return "This room has my favorite song!"
+      end
     end
   end
 

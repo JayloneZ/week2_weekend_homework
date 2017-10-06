@@ -8,12 +8,12 @@ require_relative '../songs.rb'
 class TestRooms < Minitest::Test
 
   def setup()
-    @guest1 = Guests.new("Yoni", 50, "Hips Don't Lie")
-    @guest2 = Guests.new("Huascar", 30, "99 Luftbalons")
-    @guest3 = Guests.new("Miguel", 25, "Dancing Queen")
     @song1 = Songs.new("Hips Don't Lie", "Shakira")
     @song2 = Songs.new("99 Luftbalons", "Nena")
     @song3 = Songs.new("Dancing Queen", "ABBA")
+    @guest1 = Guests.new("Yoni", 50, @song1)
+    @guest2 = Guests.new("Huascar", 30, @song2)
+    @guest3 = Guests.new("Miguel", 25, @song3)
     @room1 = Rooms.new("Latino Pop", 2)
     @room2 = Rooms.new("German Hits", 3)
     @room3 = Rooms.new("Swedish Pop", 3)
@@ -60,6 +60,12 @@ class TestRooms < Minitest::Test
     @room1.add_guest_by_name(@karaoke_bar, "Miguel")
     result = @room1.add_guest_by_name(@karaoke_bar, "Huascar")
     assert_equal("This room has reached capacity", result)
+  end
+
+  def test_favorite_song_exclaim()
+    @room1.add_song_by_title(@karaoke_bar, "Hips Don't Lie")
+    result = @room1.add_guest_by_name(@karaoke_bar, "Yoni")
+    assert_equal("This room has my favorite song!", result)
   end
 
 end
