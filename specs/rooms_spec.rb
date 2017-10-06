@@ -57,6 +57,12 @@ class TestRooms < Minitest::Test
     assert_equal([@song1], songs)
   end
 
+  def test_add_song_by_title__song_already_present()
+    @room1.add_song_by_title(@karaoke_bar, "Hips Don't Lie")
+    result = @room1.add_song_by_title(@karaoke_bar, "Hips Don't Lie")
+    assert_equal("Song already exists in this room", result)
+  end
+
   def test_room_capacity()
     @room1.add_guest_by_name(@karaoke_bar, "Yoni")
     @room1.add_guest_by_name(@karaoke_bar, "Miguel")

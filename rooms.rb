@@ -43,7 +43,11 @@ class Rooms
   def add_song_by_title(karaoke_bar, song_title)
     for song in karaoke_bar.songs
       if song.title == song_title
-        self.songs.push(song)
+        if self.songs.include?(song)
+          return "Song already exists in this room"
+        else
+          self.songs.push(song)
+        end
       end
     end
   end
