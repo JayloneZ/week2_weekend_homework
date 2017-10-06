@@ -5,10 +5,15 @@ require_relative '../guests.rb'
 class TestGuests < Minitest::Test
 
   def setup()
-    @guest1 = Guests.new(50, "Hips Don't Lie")
-    @guest2 = Guests.new(30, "99 Luftbalons")
+    @guest1 = Guests.new("Yoni", 50, "Hips Don't Lie")
+    @guest2 = Guests.new("Huascar", 30, "99 Luftbalons")
+    @guest3 = Guests.new("Miguel", 25, "Dancing Queen")
   end
 
+  def test_guest_name
+    name = @guest3.name
+    assert_equal("Miguel", name)
+  end
 
   def test_guest_money
     money = @guest1.money
