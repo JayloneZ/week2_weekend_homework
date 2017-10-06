@@ -1,4 +1,4 @@
-class CommonArea
+class KaraokeBar
 
 attr_accessor :guests, :songs
 def initialize(guests, songs)

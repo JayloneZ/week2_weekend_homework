@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/rg'
 require_relative '../rooms.rb'
 require_relative '../guests.rb'
-require_relative '../common_area.rb'
+require_relative '../karaoke_bar.rb'
 require_relative '../songs.rb'
 
 class TestRooms < Minitest::Test
@@ -17,7 +17,7 @@ class TestRooms < Minitest::Test
     @room1 = Rooms.new("Latino Pop", 2)
     @room2 = Rooms.new("German Hits", 3)
     @room3 = Rooms.new("Swedish Pop", 3)
-    @common_area = CommonArea.new([@guest1, @guest2, @guest3], [@song1, @song2, @song3])
+    @karaoke_bar = KaraokeBar.new([@guest1, @guest2, @guest3], [@song1, @song2, @song3])
   end
 
 
@@ -32,13 +32,13 @@ class TestRooms < Minitest::Test
   end
 
   def test_add_guest_by_name()
-    @room1.add_guest_by_name(@common_area, "Yoni")
+    @room1.add_guest_by_name(@karaoke_bar, "Yoni")
     guests = @room1.guests
     assert_equal([@guest1], guests)
   end
 
   def test_remove_guest_by_name()
-    @room1.add_guest_by_name(@common_area, "Yoni")
+    @room1.add_guest_by_name(@karaoke_bar, "Yoni")
     @room1.remove_guest_by_name("Yoni")
     guests = @room1.guests
     assert_equal([], guests)
@@ -50,15 +50,15 @@ class TestRooms < Minitest::Test
   end
 
   def test_add_song_by_title()
-    @room1.add_song_by_title(@common_area, "Hips Don't Lie")
+    @room1.add_song_by_title(@karaoke_bar, "Hips Don't Lie")
     songs = @room1.songs
     assert_equal([@song1], songs)
   end
 
   def test_room_capacity()
-    @room1.add_guest_by_name(@common_area, "Yoni")
-    @room1.add_guest_by_name(@common_area, "Miguel")
-    result = @room1.add_guest_by_name(@common_area, "Huascar")
+    @room1.add_guest_by_name(@karaoke_bar, "Yoni")
+    @room1.add_guest_by_name(@karaoke_bar, "Miguel")
+    result = @room1.add_guest_by_name(@karaoke_bar, "Huascar")
     assert_equal("This room has reached capacity", result)
   end
 
